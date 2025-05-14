@@ -54,10 +54,20 @@ python -m ipykernel install --user --name movies_recommendation_system --display
 pip install -r requirements.txt
 ```
 
-### STEP 07- run this file to generate the models
+### STEP 07- download dataset and put those under datasets/origin folder
+
+```bash
+movies_metadata.csv
+credits.csv
+```
+
+### STEP 08- run this files
 
 ```bash
 01_data_prep.ipynb
+02_simple_approaches.ipynb
+03_nlp_approaches.ipynb
+04_nlp_movie_recommender.ipynb
 ```
 
 ### STEP 08- run the project in localhost
@@ -65,38 +75,3 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
-
-# What I have done?
-
-### Steps:
-
-1. created a github repo: git@github.com:sandarataut/movies_recommendation.git
-2. cloned this repo to my localhost
-3. showing existing conda environments (default is "base")
-   - conda env list
-4. created a new conda environment
-   - conda create -n xxx
-5. activated existing environment
-   - conda activate xxx
-6. installed kernel package within existing environment for enabling switch the kernel in VS Code or Jupyter Notebook
-   - conda install ipykernel
-7. created a new kernel within existing environment
-   - python -m ipykernel install --user --name xxx --display-name "xxx"
-8. installed necessary packages / libriaries
-   - pip install -r requirements.txt
-     [OR]
-   - pip install joblib
-   - pip install matplotlib
-   - pip install nltk
-   - pip install numpy
-   - pip install pandas
-   - pip install requests
-   - pip install scikit-learn
-   - pip install sentence-transformers
-   - pip install scipy
-   - pip install streamlit
-   - pip install tokenizers
-   - pip install torch
-   - pip install transformers
-9. run the project in localhost
-   - streamlit run app.py

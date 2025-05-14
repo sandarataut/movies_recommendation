@@ -1,0 +1,5 @@
+.DS_Store
+datasets/origin/credits.csv
+datasets/origin/movies_metadata.csv
+datasets/clean
+models/
