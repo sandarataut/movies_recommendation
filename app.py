@@ -26,6 +26,7 @@ def load_recommender():
     logging.info("Loading recommender...")
     try:
         recommender = MovieRecommender()
+        logging.info("Calculating Similarity...")
         recommender.calculate_similarity()
         logging.info("Recommender loaded successfully.")
         return recommender

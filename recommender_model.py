@@ -38,6 +38,8 @@ class MovieRecommender:
         self.similarity_matrices = {}
         self.weights = {}
         self.recommended_movies = None
+        print("\n data_path in __init__ func")
+        print(self.data_path)
 
 
     def calculate_similarity(self, attributes=('title', 'genres', 'overview', 'cast', 'director', 'producer')):
@@ -52,6 +54,7 @@ class MovieRecommender:
         for attr in attributes:
             tfidf_matrix = tfidf.fit_transform(self.df_sample[attr])
             self.similarity_matrices[attr] = cosine_similarity(tfidf_matrix, tfidf_matrix)
+        print("\n logging in calculate_similarity func")
 
     def get_recommendations(self, movie_index, num_recommendations=10):
         """
