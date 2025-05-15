@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-sample_10000_df = pd.read_pickle("datasets/clean/sample_10000_movies_df.pkl")
+# sample_10000_df = pd.read_pickle("datasets/clean/sample_10000_movies_df.pkl")
 
 # df = pd.read_pickle("datasets/clean/movies_df.pkl")  
 # sample_df = df[['id', 'title', 'genres', 'overview', 'cast', 'director', 'producer']]
