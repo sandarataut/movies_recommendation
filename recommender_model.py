@@ -29,7 +29,7 @@ class MovieRecommender:
     using TF-IDF and cosine similarity.
     """
 
-    def __init__(self, data_path="datasets/clean/sample_10000_for_recommender_model_df.pkl"):
+    def __init__(self, data_path="datasets/clean/sample_10000_movies_df.pkl"):
         """
         Initializes the MovieRecommender with the movie data path.
         """
