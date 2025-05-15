@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 # sample_10000_df = pd.read_pickle("datasets/clean/sample_10000_movies_df.pkl")
 
@@ -38,8 +41,7 @@ class MovieRecommender:
         self.similarity_matrices = {}
         self.weights = {}
         self.recommended_movies = None
-        print("\n data_path in __init__ func")
-        print(self.data_path)
+        logging.info(f"Initializing MovieRecommender with data path: {self.data_path}")
 
 
     def calculate_similarity(self, attributes=('title', 'genres', 'overview', 'cast', 'director', 'producer')):
@@ -50,11 +52,12 @@ class MovieRecommender:
             attributes (tuple, optional): The movie attributes to calculate similarity for.
                 Defaults to ('title', 'genres', 'overview', 'cast', 'director', 'producer').
         """
+        logging.info("Calculating similarity matrices...")
         tfidf = TfidfVectorizer(stop_words='english')
         for attr in attributes:
             tfidf_matrix = tfidf.fit_transform(self.df_sample[attr])
             self.similarity_matrices[attr] = cosine_similarity(tfidf_matrix, tfidf_matrix)
-        print("\n logging in calculate_similarity func")
+        logging.info("Finishing similarity matrices...")
 
     def get_recommendations(self, movie_index, num_recommendations=10):
         """
