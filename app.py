@@ -5,6 +5,9 @@ import pandas as pd
 import requests
 # from sklearn.metrics.pairwise import cosine_similarity
 from recommender_model import MovieRecommender
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 # set app config
 st.set_page_config(page_title="Movies Recommendation", page_icon="🎬", layout="wide")    
@@ -20,16 +23,28 @@ st.markdown(f"""
 # --- Load Recommender ---
 @st.cache_resource
 def load_recommender():
-    recommender = MovieRecommender()
-    recommender.calculate_similarity()
-    return recommender
+    logging.info("Loading recommender...")
+    try:
+        recommender = MovieRecommender()
+        recommender.calculate_similarity()
+        logging.info("Recommender loaded successfully.")
+        return recommender
+    except Exception as e:
+        logging.error(f"Error loading recommender: {e}")
+        return None
 
 recommender = load_recommender()
+if recommender is None:
+    st.error("Failed to load the movie recommender.")
+    st.stop()
+
 df_movies = recommender.df_sample
+logging.info(f"Number of movies loaded: {len(df_movies)}")
 
 # --- Fetch Poster Function ---
 @st.cache_data  # Cache the poster URLs for better performance
 def fetch_poster(movie_titles):
+    logging.info(f"Fetching posters for: {movie_titles}")
     ids = []
     posters = []
     for title in movie_titles:
@@ -58,6 +73,7 @@ def fetch_poster(movie_titles):
             posters.append(full_path)
         else:
             posters.append(None)
+    logging.info(f"Posters fetched successfully for: {movie_titles}")
     return posters
 
 # --- Movie Recommendation and Display ---
