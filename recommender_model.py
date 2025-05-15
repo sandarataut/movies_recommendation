@@ -54,10 +54,20 @@ class MovieRecommender:
         """
         logging.info("Calculating similarity matrices...")
         tfidf = TfidfVectorizer(stop_words='english')
-        for attr in attributes:
-            tfidf_matrix = tfidf.fit_transform(self.df_sample[attr])
-            self.similarity_matrices[attr] = cosine_similarity(tfidf_matrix, tfidf_matrix)
-        logging.info("Finishing similarity matrices...")
+        try:
+            for attr in attributes:
+                logging.info(f"Processing attribute: {attr}")
+                tfidf_matrix = tfidf.fit_transform(self.df_sample[attr].fillna(''))
+                self.similarity_matrices[attr] = cosine_similarity(tfidf_matrix, tfidf_matrix)
+            logging.info("Similarity matrices calculated successfully.")
+        except Exception as e:
+            logging.error(f"Error calculating similarity: {e}")
+            raise Exception(f"Error calculating similarity: {e}")
+        
+        # for attr in attributes:
+        #     tfidf_matrix = tfidf.fit_transform(self.df_sample[attr])
+        #     self.similarity_matrices[attr] = cosine_similarity(tfidf_matrix, tfidf_matrix)
+        # logging.info("Finishing similarity matrices...")
 
     def get_recommendations(self, movie_index, num_recommendations=10):
         """
