@@ -3,22 +3,24 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-df = pd.read_pickle("datasets/clean/movies_df.pkl")  
-sample_df = df[['id', 'title', 'genres', 'overview', 'cast', 'director', 'producer']]
+sample_10000_df = pd.read_pickle("datasets/clean/sample_10000_movies_df.pkl")
 
-sample_size=10000
-toy_story_movies = sample_df[sample_df['title'].str.contains('Toy Story', case=False)]
-remaining_sample_size = sample_size - len(toy_story_movies)
+# df = pd.read_pickle("datasets/clean/movies_df.pkl")  
+# sample_df = df[['id', 'title', 'genres', 'overview', 'cast', 'director', 'producer']]
 
-if remaining_sample_size > 0:
-    non_toy_story_movies = sample_df[~sample_df['title'].str.contains('Toy Story', case=False)]
-    sampled_non_toy_story = non_toy_story_movies.sample(n=min(remaining_sample_size, len(non_toy_story_movies)))
-    sample_10000_df = pd.concat([toy_story_movies, sampled_non_toy_story], ignore_index=True).fillna('')
-else:
-    sample_10000_df = toy_story_movies.sample(n=sample_size, ignore_index=True).fillna('')
+# sample_size=10000
+# toy_story_movies = sample_df[sample_df['title'].str.contains('Toy Story', case=False)]
+# remaining_sample_size = sample_size - len(toy_story_movies)
 
-sample_10000_df = sample_10000_df.sample(frac=1).reset_index(drop=True).fillna('')
-sample_10000_df.to_pickle("datasets/clean/sample_10000_for_recommender_model_df.pkl") 
+# if remaining_sample_size > 0:
+#     non_toy_story_movies = sample_df[~sample_df['title'].str.contains('Toy Story', case=False)]
+#     sampled_non_toy_story = non_toy_story_movies.sample(n=min(remaining_sample_size, len(non_toy_story_movies)))
+#     sample_10000_df = pd.concat([toy_story_movies, sampled_non_toy_story], ignore_index=True).fillna('')
+# else:
+#     sample_10000_df = toy_story_movies.sample(n=sample_size, ignore_index=True).fillna('')
+
+# sample_10000_df = sample_10000_df.sample(frac=1).reset_index(drop=True).fillna('')
+# sample_10000_df.to_pickle("datasets/clean/sample_10000_for_recommender_model_df.pkl") 
 
 # OOP movie recommendation model
 class MovieRecommender:

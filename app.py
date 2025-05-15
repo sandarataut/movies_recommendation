@@ -43,18 +43,18 @@ def fetch_poster(movie_titles):
 
     for movie_id in ids:
         url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=5a2d8928f55e54df341caf236e1fc136"
-        print("\n url")
-        print(url)
+        # print("\n url")
+        # print(url)
         response = requests.get(url)
         # response.raise_for_status()  # Raise an exception for bad status codes
         data = response.json()
         poster_path = data['poster_path']
-        print("\n poster_path")
-        print(poster_path)
+        # print("\n poster_path")
+        # print(poster_path)
         if poster_path:
             full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-            print("\n full_path")
-            print(full_path)
+            # print("\n full_path")
+            # print(full_path)
             posters.append(full_path)
         else:
             posters.append(None)
@@ -93,7 +93,7 @@ if selected_movie_title:
                 with st.container():
                     st.markdown(f"<h3 style='font-size: 16px; height: 50px; overflow: hidden;'>{recommended_movie_titles[i]}</h3>", unsafe_allow_html=True)
                     if recommended_posters[i]:
-                        st.image(recommended_posters[i], use_column_width=True)
+                        st.image(recommended_posters[i], use_container_width=True)
                     else:
                         st.markdown("<p style='text-align: center;'>No Poster Available</p>", unsafe_allow_html=True)
 

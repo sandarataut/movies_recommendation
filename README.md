@@ -2,6 +2,10 @@
 
 This project not only serves as a practical application of my study in Master of Computer & Information Science but also addresses the real-world need for a personalized entertainment experience in the digital age.
 
+# production_website
+
+[Link] (https://moviesrecommendation-sandar-at-aut.streamlit.app)
+
 # dataset
 
 - [MovieLens Dataset link](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data)
@@ -54,7 +58,7 @@ python -m ipykernel install --user --name movies_recommendation_system --display
 pip install -r requirements.txt
 ```
 
-### STEP 07- download dataset and put those under datasets/origin folder
+### STEP 07- download files from [MovieLens Dataset link](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data) and put those under datasets/origin folder
 
 ```bash
 movies_metadata.csv
@@ -70,7 +74,7 @@ credits.csv
 04_nlp_movie_recommender.ipynb
 ```
 
-### STEP 08- run the project in localhost
+### STEP 09- run the project in localhost
 
 ```bash
 streamlit run app.py

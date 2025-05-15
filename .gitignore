@@ -1,5 +1,6 @@
 .DS_Store
-datasets/origin/credits.csv
-datasets/origin/movies_metadata.csv
-datasets/clean
-models/
+datasets/origin/*
+datasets/clean/*
+!datasets/clean/sample_10000_movies_df.pkl
+models/*
+__pycache__/*
