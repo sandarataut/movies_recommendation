@@ -24,8 +24,9 @@ st.markdown(f"""
 @st.cache_resource
 def load_recommender():
     logging.info("Loading recommender...")
+    data_path = "sample_10000_for_recommender_model_df.pkl"
     try:
-        recommender = MovieRecommender()
+        recommender = MovieRecommender(data_path=data_path)
         logging.info("Calculating Similarity...")
         recommender.calculate_similarity()
         logging.info("Recommender loaded successfully.")
