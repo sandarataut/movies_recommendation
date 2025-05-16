@@ -2,28 +2,10 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import joblib
 import logging
 
 logging.basicConfig(level=logging.INFO)
-
-# sample_10000_df = pd.read_pickle("datasets/clean/sample_10000_movies_df.pkl")
-
-# df = pd.read_pickle("datasets/clean/movies_df.pkl")  
-# sample_df = df[['id', 'title', 'genres', 'overview', 'cast', 'director', 'producer']]
-
-# sample_size=10000
-# toy_story_movies = sample_df[sample_df['title'].str.contains('Toy Story', case=False)]
-# remaining_sample_size = sample_size - len(toy_story_movies)
-
-# if remaining_sample_size > 0:
-#     non_toy_story_movies = sample_df[~sample_df['title'].str.contains('Toy Story', case=False)]
-#     sampled_non_toy_story = non_toy_story_movies.sample(n=min(remaining_sample_size, len(non_toy_story_movies)))
-#     sample_10000_df = pd.concat([toy_story_movies, sampled_non_toy_story], ignore_index=True).fillna('')
-# else:
-#     sample_10000_df = toy_story_movies.sample(n=sample_size, ignore_index=True).fillna('')
-
-# sample_10000_df = sample_10000_df.sample(frac=1).reset_index(drop=True).fillna('')
-# sample_10000_df.to_pickle("datasets/clean/sample_10000_for_recommender_model_df.pkl") 
 
 # OOP movie recommendation model
 class MovieRecommender:
@@ -32,7 +14,7 @@ class MovieRecommender:
     using TF-IDF and cosine similarity.
     """
 
-    def __init__(self, data_path="sample_10000_for_recommender_model_df.pkl"):
+    def __init__(self, data_path="sample_10000_for_recommender_model_df.pkl", similarity_dir="models/"):
         """
         Initializes the MovieRecommender with the movie data path.
         """
@@ -42,6 +24,8 @@ class MovieRecommender:
         self.weights = {}
         self.recommended_movies = None
         logging.info(f"Initializing MovieRecommender with data path: {self.data_path}")
+        self.similarity_dir = similarity_dir
+        self._load_similarity_matrices()
 
 
     def calculate_similarity(self, attributes=('title', 'genres', 'overview', 'cast', 'director', 'producer')):
@@ -64,10 +48,30 @@ class MovieRecommender:
             logging.error(f"Error calculating similarity: {e}")
             raise Exception(f"Error calculating similarity: {e}")
         
-        # for attr in attributes:
-        #     tfidf_matrix = tfidf.fit_transform(self.df_sample[attr])
-        #     self.similarity_matrices[attr] = cosine_similarity(tfidf_matrix, tfidf_matrix)
-        # logging.info("Finishing similarity matrices...")
+    
+    def _load_similarity_matrices(self):
+        """
+        Loads pre-calculated similarity matrices from the specified directory.
+        """
+        logging.info(f"Loading saved similarity matrices from: {self.similarity_dir}")
+        expected_files = {
+            'title': 'cosine_similarity_title.joblib',
+            'genres': 'cosine_similarity_genres.joblib',
+            'overview': 'cosine_similarity_overview.joblib',
+            'cast': 'cosine_similarity_cast.joblib',
+            'director': 'cosine_similarity_director.joblib',
+            'producer': 'cosine_similarity_producer.joblib'
+        }
+        for attr, filename in expected_files.items():
+            filepath = self.similarity_dir + filename
+            try:
+                self.similarity_matrices[attr] = joblib.load(filepath)
+                logging.info(f"Loaded similarity matrix for {attr} from {filepath}")
+            except FileNotFoundError:
+                logging.warning(f"Saved similarity matrix not found for {attr} at {filepath}. Will calculate and save.")
+                return 
+        logging.info("Finished loading saved similarity matrices.")
+        
 
     def get_recommendations(self, movie_index, num_recommendations=10):
         """
@@ -158,7 +162,11 @@ class MovieRecommender:
            pd.DataFrame: A DataFrame containing the recommended movies
 
         """
-        self.calculate_similarity()
+        # self.calculate_similarity()
+        if not self.similarity_matrices:
+            logging.info("Similarity matrices not loaded. Calculating and saving...")
+            #self.calculate_similarity() #removed
+            raise ValueError("Similarity matrices not loaded.  Please pre-calculate and save them.")
         
         if movie_title:
             try:
