@@ -1,7 +1,8 @@
 .DS_Store
 datasets/origin/*
 datasets/clean/*
-# !datasets/clean/sample_10000_movies_df.pkl
-# !datasets/clean/sample_10000_for_recommender_model_df.pkl
-models/*
+!datasets/clean/sample_10000_movies_df.pkl
+models/cosine_similarity_matrix.npy
+models/tfidf_matrix.joblib
+models/tfidf_vectorizer.joblib
 __pycache__/*
