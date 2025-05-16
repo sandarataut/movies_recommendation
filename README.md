@@ -2,10 +2,6 @@
 
 This project not only serves as a practical application of my study in Master of Computer & Information Science but also addresses the real-world need for a personalized entertainment experience in the digital age.
 
-# production_website
-
-[Link] (https://moviesrecommendation-sandar-at-aut.streamlit.app)
-
 # dataset
 
 - [MovieLens Dataset link](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data)
