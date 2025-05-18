@@ -2,5 +2,6 @@
 datasets/origin/*
 datasets/clean/*
 !datasets/clean/sample_10000_movies_df.pkl
+!datasets/clean/sample_1000_movies_df.pkl
 models/*
 __pycache__/*

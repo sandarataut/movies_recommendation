@@ -25,7 +25,7 @@ class MovieRecommender:
         self.recommended_movies = None
         logging.info(f"Initializing MovieRecommender with data path: {self.data_path}")
         self.similarity_dir = similarity_dir
-        self._load_similarity_matrices()
+        self.load_similarity_matrices()
 
 
     def calculate_similarity(self, attributes=('title', 'genres', 'overview', 'cast', 'director', 'producer')):
@@ -49,7 +49,7 @@ class MovieRecommender:
             raise Exception(f"Error calculating similarity: {e}")
         
     
-    def _load_similarity_matrices(self):
+    def load_similarity_matrices(self):
         """
         Loads pre-calculated similarity matrices from the specified directory.
         """
@@ -165,7 +165,7 @@ class MovieRecommender:
         # self.calculate_similarity()
         if not self.similarity_matrices:
             logging.info("Similarity matrices not loaded. Calculating and saving...")
-            #self.calculate_similarity() #removed
+            self.calculate_similarity()
             raise ValueError("Similarity matrices not loaded.  Please pre-calculate and save them.")
         
         if movie_title:
