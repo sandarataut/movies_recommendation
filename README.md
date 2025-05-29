@@ -1,8 +1,10 @@
-# movies_recommendation_system
+# Movie Recommendations System
 
 This project not only serves as a practical application of my study in Master of Computer & Information Science but also addresses the real-world need for a personalized entertainment experience in the digital age.
 
-# dataset
+The pre-trained cosine similarity object was not committed to this repository due to exceeding GitHub's 100 MB file size constraint. To obtain this object, please run the provided code on your local environment.
+
+# Dataset
 
 - [MovieLens Dataset link](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data)
 
@@ -75,3 +77,9 @@ credits.csv
 ```bash
 streamlit run app.py
 ```
+
+# Demo
+
+<img src="screenshots/screenshot_1.png" alt="screenshot_1" width="70%">
+<img src="screenshots/screenshot_2.png" alt="screenshot_2" width="70%">
+<img src="screenshots/screenshot_3.png" alt="screenshot_3" width="70%">
