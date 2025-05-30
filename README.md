@@ -80,6 +80,8 @@ streamlit run app.py
 
 # Demo
 
+- [Website link](https://moviesrecommendation-sandar-at-aut.streamlit.app/)
+
 <img src="screenshots/screenshot_1.png" alt="screenshot_1" width="70%">
 <img src="screenshots/screenshot_2.png" alt="screenshot_2" width="70%">
 <img src="screenshots/screenshot_3.png" alt="screenshot_3" width="70%">
